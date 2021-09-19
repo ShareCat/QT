@@ -18,6 +18,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(pushButton, SIGNAL(clicked()), this, SLOT(pushButtonClicked()));
 }
 
+/* 在 MainWindow 的析构函数里退出线程，然后判断线程是否退出成功。因为
+我们这个线程是没有循环操作的，直接点击按钮开启线程后，做了 2s 延时操作后就完成了。所
+以我们在析构函数里直接退出没有关系 */
 MainWindow::~MainWindow()
 {
     /* 进程退出，注意本例 run()方法没写循环，此方法需要有循环才生效 */
@@ -35,6 +38,8 @@ void MainWindow::handleResults(const QString &result)
     qDebug()<<result<<endl;
 }
 
+/* 按钮点击后开启线程，首先我们得判断这个线程是否在运行，如果不在运行
+我们则开始线程，开始线程用 start()方法，它会调用重写的 run()函数的 */
 void MainWindow::pushButtonClicked()
 {
     /* 检查线程是否在运行，如果没有则开始运行 */
