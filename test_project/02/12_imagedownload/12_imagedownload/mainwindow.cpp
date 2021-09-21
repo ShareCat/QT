@@ -109,8 +109,7 @@ void MainWindow::startDownload()
     networkRequest.setUrl(newUrl);
 
     /* 网络响应 */
-    QNetworkReply *newReply =
-    networkAccessManager->get(networkRequest);
+    QNetworkReply *newReply = networkAccessManager->get(networkRequest);
 
     /* 信号槽连接 */
     connect(newReply, SIGNAL(finished()), this, SLOT(replyFinished()));
